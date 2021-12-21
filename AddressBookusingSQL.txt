@@ -1,0 +1,205 @@
+
+------- uc 1 ------------
+
+mysql> create database AddressBookService;
+Query OK, 1 row affected (0.05 sec)
+
+
+--------- uc 2 ------------
+
+mysql> CREATE TABLE ADDRESSBOOK(
+    -> ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> FIRST_NAME VARCHAR(20) NOT NULL,
+    -> LAST_NAME VARCHAR(15) NOT NULL,
+    -> ADDRESS VARCHAR(25),
+    -> CITY VARCHAR(20) NOT NULL,
+    -> STATE VARCHAR(20) NOT NULL,
+    -> ZIPCODE INT(6) NOT NULL,
+    -> MOBILE_NUMBER VARCHAR(10) NOT NULL,
+    -> EMAIL_ID NVARCHAR(320),
+    -> PRIMARY KEY (ID));
+Query OK, 0 rows affected, 2 warnings (0.06 sec)
+
+-------- uc 3-----------
+
+mysql> INSERT INTO ADDRESSBOOK (FIRST_NAME ,LAST_NAME ,ADDRESS ,CITY,STATE,ZIPCODE ,MOBILE_NUMBER,EMAIL_ID) VALUES ('Dhanunjaya','kummari','bramhanapalli','puttaparthi','andhra','515134','8978041840','kdjay517@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID           |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+1 row in set (0.00 sec)
+
+------------ uc 4 ---------
+
+mysql> update addressbook set city = 'kurnool' , first_name = 'bhuvan' where id = '4';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com      |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com     |
+|  4 | bhuvan     | kumar     | kurnool       | kurnool     | andhra |  500252 | 9998886600    | bhuvanchandra@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> update addressbook set city = 'kurnool' , first_name = 'bhuvan' , last_name = 'chandra' , address = 'bathamcharla' , zipcode = 500201 where id = '4';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com      |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com     |
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra |  500201 | 9998886600    | bhuvanchandra@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+3 rows in set (0.01 sec)
+
+------------ uc 5 ------------
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID            |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com  |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com |
+|  3 |            | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com  |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from addressbook where id = '3';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID            |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com  |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+---------------------+
+2 rows in set (0.00 sec)
+
+
+------------- uc6 --------
+
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com      |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com     |
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra |  500201 | 9998886600    | bhuvanchandra@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT* FROM ADDRESSBOOK WHERE CITY = 'PUTTAPARTHI';
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID           |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT* FROM ADDRESSBOOK WHERE STATE = 'ANDHRA';
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com      |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com     |
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra |  500201 | 9998886600    | bhuvanchandra@gmail.com |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+3 rows in set (0.00 sec)
+
+
+----------- uc 7-----------
+
+
+mysql> select city, count(*) from addressbook where city = 'kurnool';
++---------+----------+
+| city    | count(*) |
++---------+----------+
+| kurnool |        1 |
++---------+----------+
+1 row in set (0.01 sec)
+
+mysql> select state, count(*) from addressbook where state = 'andhra';
++--------+----------+
+| state  | count(*) |
++--------+----------+
+| andhra |        3 |
++--------+----------+
+1 row in set (0.00 sec)
+
+
+----------- uc 8----------
+
+mysql> select* from addressbook where state = 'andhra' order by first_name;
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE  | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra |  500201 | 9998886600    | bhuvanchandra@gmail.com |
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra |  515134 | 8978041840    | kdjay517@gmail.com      |
+|  2 | praveen    | kumar     |               | proddatur   | andhra |  500252 | 9391452589    | mcpraveen@gmail.com     |
++----+------------+-----------+---------------+-------------+--------+---------+---------------+-------------------------+
+3 rows in set (0.00 sec)
+
+-----------uc 9---------
+
+mysql> alter table addressbook add type varchar(30) after email_id;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE     | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                | type |
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra    |  515134 | 8978041840    | kdjay517@gmail.com      | NULL |
+|  2 | praveen    | kumar     |               | proddatur   | andhra    |  500252 | 9391452589    | mcpraveen@gmail.com     | NULL |
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra    |  500201 | 9998886600    | bhuvanchandra@gmail.com | NULL |
+|  5 | praveen    | kumar     | kummarpalli   | proddatur   | telangana |  500252 | 9998886600    | bhuvanchandra@gmail.com | NULL |
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set type = 'friend' where first_name = "bhuvan";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook set type = 'profissional' where first_name = "praveen";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update addressbook set type = 'family' where address = "";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM ADDRESSBOOK;
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+--------------+
+| ID | FIRST_NAME | LAST_NAME | ADDRESS       | CITY        | STATE     | ZIPCODE | MOBILE_NUMBER | EMAIL_ID                | type         |
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+--------------+
+|  1 | Dhanunjaya | kummari   | bramhanapalli | puttaparthi | andhra    |  515134 | 8978041840    | kdjay517@gmail.com      | family       |
+|  2 | praveen    | kumar     |               | proddatur   | andhra    |  500252 | 9391452589    | mcpraveen@gmail.com     | family       |
+|  4 | bhuvan     | chandra   | bathamcharla  | kurnool     | andhra    |  500201 | 9998886600    | bhuvanchandra@gmail.com | friend       |
+|  5 | praveen    | kumar     | kummarpalli   | proddatur   | telangana |  500252 | 9998886600    | bhuvanchandra@gmail.com | profissional |
++----+------------+-----------+---------------+-------------+-----------+---------+---------------+-------------------------+--------------+
+4 rows in set (0.00 sec)
+
+
+---------- uc 10 ------------
+
+
+mysql> select type, count(*) from addressbook where type = "family";
++--------+----------+
+| type   | count(*) |
++--------+----------+
+| family |        2 |
++--------+----------+
+1 row in set (0.00 sec)
